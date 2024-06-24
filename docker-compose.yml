@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: gunicorn --bind 0.0.0.0:8000 mysite.wsgi:application
+    ports:
+      - "8003:8000"
+    environment:
+      DJANGO_SETTINGS_MODULE: mysite.settings
+      PYTHONUNBUFFERED: '1'
+    volumes:
+      - .:/app
